@@ -24,6 +24,14 @@ public class TechCrew {
             CascadeType.DETACH,
             CascadeType.REFRESH
     })
-    private List<SoftwareDeveloper> softwareDeveloperList = new ArrayList<>();
+    private List<SoftwareDeveloper> softwareDevelopers = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.DETACH,
+            CascadeType.REFRESH
+    })
+    private List<TechConsultant> techConsultants = new ArrayList<>();
 
 }
