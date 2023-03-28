@@ -3,6 +3,8 @@ package com.alpdogan.CompanyManagementSystem.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,5 +17,13 @@ public class TechCrew {
 
     @Column(name = "crew_name")
     private String crewName;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.DETACH,
+            CascadeType.REFRESH
+    })
+    private List<SoftwareDeveloper> softwareDeveloperList = new ArrayList<>();
 
 }
