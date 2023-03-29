@@ -3,7 +3,7 @@ package com.alpdogan.CompanyManagementSystem.dto.request;
 import lombok.Data;
 
 @Data
-public class UpdateSofwareDeveloperDto {
+public class UpdateSoftwareDeveloperDto {
 
     private int id;
 
@@ -14,5 +14,7 @@ public class UpdateSofwareDeveloperDto {
     private boolean isFrontEndDeveloper;
 
     private boolean isArchitect;
+
+    private int techCrewId;
 
 }
