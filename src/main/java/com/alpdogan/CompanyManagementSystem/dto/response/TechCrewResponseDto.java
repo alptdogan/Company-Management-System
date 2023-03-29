@@ -1,4 +1,4 @@
-package com.alpdogan.CompanyManagementSystem.dto.request;
+package com.alpdogan.CompanyManagementSystem.dto.response;
 
 import lombok.Data;
 
