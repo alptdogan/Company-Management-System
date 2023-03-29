@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TechCrewRepository extends CrudRepository<TechCrew, Integer> {
 
+    TechCrew findTechCrewById(int id);
+
 }

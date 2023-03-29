@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SoftwareDeveloperRepository extends CrudRepository<SoftwareDeveloper, Integer> {
+
+    SoftwareDeveloper findSofwareDeveloperById(int id);
+
 }

@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TechConsultantRepository extends CrudRepository<TechConsultant, Integer> {
+
+    TechConsultant findTechConsultantById(int id);
+
 }
