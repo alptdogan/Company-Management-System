@@ -3,7 +3,7 @@ package com.alpdogan.CompanyManagementSystem.dto.response;
 import lombok.Data;
 
 @Data
-public class SofwareDeveloperResponseDto {
+public class SoftwareDeveloperResponseDto {
 
     private int id;
 
