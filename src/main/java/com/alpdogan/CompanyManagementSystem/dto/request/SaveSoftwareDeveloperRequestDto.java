@@ -13,4 +13,6 @@ public class SaveSoftwareDeveloperRequestDto {
 
     private boolean isArchitect;
 
+    private int techCrewId;
+
 }
