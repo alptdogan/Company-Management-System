@@ -9,4 +9,7 @@ public class UpdateTechConsultantRequestDto {
 
     private String fullName;
 
+    private int techCrewId;
+
+
 }

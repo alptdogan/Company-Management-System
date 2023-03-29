@@ -7,4 +7,7 @@ public class SaveTechConsultantRequestDto {
 
     private String fullName;
 
+    private int techCrewId;
+
+
 }
