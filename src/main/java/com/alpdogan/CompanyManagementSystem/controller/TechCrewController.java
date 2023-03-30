@@ -28,7 +28,7 @@ public class TechCrewController {
 
     }
 
-    @GetMapping("findAllTechCrew")
+    @GetMapping("findAllTechCrews")
     public ResponseEntity<List<TechCrewResponseDto>> findAllTechCrews() {
 
         List<TechCrewResponseDto> techCrewResponseDtos = techCrewService.findAllTechCrews();
