@@ -61,7 +61,7 @@ public class TechConsultantService {
 
         for (TechConsultant techConsultant : techConsultants) {
 
-            TechConsultantResponseDto softwareDeveloperResponseDto = modelMapper.map(techConsultants, TechConsultantResponseDto.class);
+            TechConsultantResponseDto softwareDeveloperResponseDto = modelMapper.map(techConsultant, TechConsultantResponseDto.class);
 
             techConsultantResponseDtos.add(softwareDeveloperResponseDto);
 
