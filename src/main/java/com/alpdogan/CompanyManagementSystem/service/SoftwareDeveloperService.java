@@ -1,7 +1,7 @@
 package com.alpdogan.CompanyManagementSystem.service;
 
 import com.alpdogan.CompanyManagementSystem.dto.request.SaveSoftwareDeveloperRequestDto;
-import com.alpdogan.CompanyManagementSystem.dto.request.UpdateSoftwareDeveloperDto;
+import com.alpdogan.CompanyManagementSystem.dto.request.UpdateSoftwareDeveloperRequestDto;
 import com.alpdogan.CompanyManagementSystem.dto.response.SoftwareDeveloperResponseDto;
 import com.alpdogan.CompanyManagementSystem.entity.SoftwareDeveloper;
 import com.alpdogan.CompanyManagementSystem.entity.TechCrew;
@@ -77,7 +77,7 @@ public class SoftwareDeveloperService {
 
     }
 
-    public String updateSoftwareDeveloper(UpdateSoftwareDeveloperDto updateSoftwareDeveloperDto) {
+    public String updateSoftwareDeveloper(UpdateSoftwareDeveloperRequestDto updateSoftwareDeveloperDto) {
 
         int idRequest = updateSoftwareDeveloperDto.getId();
         String fullNameRequest = updateSoftwareDeveloperDto.getFullName();

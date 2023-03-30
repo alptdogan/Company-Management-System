@@ -1,11 +1,8 @@
 package com.alpdogan.CompanyManagementSystem.service;
 
 import com.alpdogan.CompanyManagementSystem.dto.request.SaveTechConsultantRequestDto;
-import com.alpdogan.CompanyManagementSystem.dto.request.UpdateSoftwareDeveloperDto;
 import com.alpdogan.CompanyManagementSystem.dto.request.UpdateTechConsultantRequestDto;
-import com.alpdogan.CompanyManagementSystem.dto.response.SoftwareDeveloperResponseDto;
 import com.alpdogan.CompanyManagementSystem.dto.response.TechConsultantResponseDto;
-import com.alpdogan.CompanyManagementSystem.entity.SoftwareDeveloper;
 import com.alpdogan.CompanyManagementSystem.entity.TechConsultant;
 import com.alpdogan.CompanyManagementSystem.entity.TechCrew;
 import com.alpdogan.CompanyManagementSystem.repository.TechConsultantRepository;
