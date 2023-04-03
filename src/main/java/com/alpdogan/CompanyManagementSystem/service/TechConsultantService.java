@@ -95,6 +95,8 @@ public class TechConsultantService {
         Optional<TechConsultant> optionalTechConsultant = techConsultantRepository.findById(techConsultantId);
         TechConsultant techConsultant = optionalTechConsultant.get();
 
+        techConsultant.getTechCrew().getTechConsultants().remove(techConsultant);
+
         techConsultantRepository.delete(techConsultant);
 
         return "Tech Consultant Deleted.";

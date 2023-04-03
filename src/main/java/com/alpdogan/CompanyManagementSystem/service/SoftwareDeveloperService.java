@@ -107,6 +107,9 @@ public class SoftwareDeveloperService {
         Optional<SoftwareDeveloper> optionalSoftwareDeveloper = softwareDeveloperRepository.findById(softwareDeveloperId);
         SoftwareDeveloper softwareDeveloper = optionalSoftwareDeveloper.get();
 
+        // bunu yapmalıydım!!!!!!
+        softwareDeveloper.getTechCrew().getSoftwareDevelopers().remove(softwareDeveloper);
+
         softwareDeveloperRepository.delete(softwareDeveloper);
 
         return "Software Developer Deleted.";
