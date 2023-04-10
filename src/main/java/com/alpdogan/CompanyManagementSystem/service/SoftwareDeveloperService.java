@@ -27,6 +27,41 @@ public class SoftwareDeveloperService {
     @Autowired
     ModelMapper modelMapper;
 
+    public SoftwareDeveloper findSoftwareDeveloperById(int softwareDeveloperId) throws Exception {
+
+        Optional<SoftwareDeveloper> softwareDeveloperOptional = softwareDeveloperRepository.findById(softwareDeveloperId);
+
+        if (softwareDeveloperOptional.isPresent()){
+
+            return softwareDeveloperRepository.findSofwareDeveloperById(softwareDeveloperId);
+
+        }
+        else {
+
+            throw new Exception();
+
+        }
+
+    }
+
+    public List<SoftwareDeveloperResponseDto> findAllSoftwareDevelopers() {
+
+        Iterable<SoftwareDeveloper> softwareDevelopers = softwareDeveloperRepository.findAll();
+
+        List<SoftwareDeveloperResponseDto> softwareDeveloperResponseDtos = new ArrayList<>();
+
+        for (SoftwareDeveloper softwareDeveloper : softwareDevelopers) {
+
+            SoftwareDeveloperResponseDto softwareDeveloperResponseDto = modelMapper.map(softwareDeveloper, SoftwareDeveloperResponseDto.class);
+
+            softwareDeveloperResponseDtos.add(softwareDeveloperResponseDto);
+
+        }
+
+        return softwareDeveloperResponseDtos;
+
+    }
+
     public String saveSoftwareDeveloper(SaveSoftwareDeveloperRequestDto saveSoftwareDeveloperRequestDto) {
 
         String fullNameRequest = saveSoftwareDeveloperRequestDto.getFullName();
@@ -50,30 +85,6 @@ public class SoftwareDeveloperService {
         softwareDeveloperRepository.save(softwareDeveloper);
 
         return softwareDeveloper.getFullName() + " Has Been Successfully Created and Added to " + techCrew.getCrewName();
-
-    }
-
-    public SoftwareDeveloper findSoftwareDeveloperById(int softwareDeveloperId) {
-
-        return softwareDeveloperRepository.findSofwareDeveloperById(softwareDeveloperId);
-
-    }
-
-    public List<SoftwareDeveloperResponseDto> findAllSoftwareDevelopers() {
-
-        Iterable<SoftwareDeveloper> softwareDevelopers = softwareDeveloperRepository.findAll();
-
-        List<SoftwareDeveloperResponseDto> softwareDeveloperResponseDtos = new ArrayList<>();
-
-        for (SoftwareDeveloper softwareDeveloper : softwareDevelopers) {
-
-            SoftwareDeveloperResponseDto softwareDeveloperResponseDto = modelMapper.map(softwareDeveloper, SoftwareDeveloperResponseDto.class);
-
-            softwareDeveloperResponseDtos.add(softwareDeveloperResponseDto);
-
-        }
-
-        return softwareDeveloperResponseDtos;
 
     }
 

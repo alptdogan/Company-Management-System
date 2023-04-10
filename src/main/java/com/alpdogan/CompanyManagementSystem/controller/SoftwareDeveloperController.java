@@ -1,5 +1,6 @@
 package com.alpdogan.CompanyManagementSystem.controller;
 
+import com.alpdogan.CompanyManagementSystem.configuration.ResponseModel;
 import com.alpdogan.CompanyManagementSystem.dto.request.SaveSoftwareDeveloperRequestDto;
 import com.alpdogan.CompanyManagementSystem.dto.request.UpdateSoftwareDeveloperRequestDto;
 import com.alpdogan.CompanyManagementSystem.dto.response.SoftwareDeveloperResponseDto;
@@ -20,11 +21,18 @@ public class SoftwareDeveloperController {
     SoftwareDeveloperService softwareDeveloperService;
 
     @GetMapping("/findSoftwareDeveloperById")
-    public ResponseEntity<SoftwareDeveloper> findSoftwareDeveloperById(@RequestParam int softwareDeveloperId) {
+    public ResponseEntity<?> findSoftwareDeveloperById(@RequestParam int softwareDeveloperId) {
 
-        SoftwareDeveloper softwareDeveloper = softwareDeveloperService.findSoftwareDeveloperById(softwareDeveloperId);
+        try{
+            SoftwareDeveloper softwareDeveloper = softwareDeveloperService.findSoftwareDeveloperById(softwareDeveloperId);
 
-        return new ResponseEntity<>(softwareDeveloper, HttpStatus.OK);
+            return new ResponseEntity<>(softwareDeveloper, HttpStatus.OK);
+        }
+        catch (Exception e) {
+
+            return new ResponseEntity<>(new ResponseModel("No Developer Found With The Specified ID."), HttpStatus.NOT_FOUND);
+
+        }
 
     }
 
