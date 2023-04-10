@@ -71,14 +71,23 @@ public class TechCrewService {
 
     }
 
-    public String deleteTechCrewById(Integer techCrewId) {
+    public String deleteTechCrewById(Integer techCrewId) throws Exception {
 
         Optional<TechCrew> techCrewOptional = techCrewRepository.findById(techCrewId);
-        TechCrew techCrew = techCrewOptional.get();
 
-        techCrewRepository.delete(techCrew);
+        if (techCrewOptional.isPresent()) {
 
-        return "Tech Crew Deleted.";
+            TechCrew techCrew = techCrewOptional.get();
+
+            techCrewRepository.delete(techCrew);
+
+            return "Tech Crew Deleted.";
+
+        }else {
+
+            throw new Exception("Tech Crew Not Found.");
+
+        }
 
     }
 

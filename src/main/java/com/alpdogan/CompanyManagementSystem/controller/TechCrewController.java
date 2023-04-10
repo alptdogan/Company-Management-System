@@ -58,9 +58,18 @@ public class TechCrewController {
     @DeleteMapping("/deleteTechCrew")
     public ResponseEntity<String> deleteTechCrewById(@RequestParam Integer techCrewId) {
 
-        String deleteTechCrewDescription = techCrewService.deleteTechCrewById(techCrewId);
+        try {
+            
+            String deleteTechCrewDescription = techCrewService.deleteTechCrewById(techCrewId);
 
-        return new ResponseEntity<>(deleteTechCrewDescription, HttpStatus.OK);
+            return new ResponseEntity<>(deleteTechCrewDescription, HttpStatus.OK);
+
+        }catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+
+        }
+
 
     }
 
