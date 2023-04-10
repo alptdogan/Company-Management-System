@@ -35,14 +35,34 @@ public class TechCrewController {
 
         return new ResponseEntity<>(techCrewResponseDtos, HttpStatus.OK);
 
+        /*
+        try {
+            List<TechCrewResponseDto> techCrewResponseDtos = techCrewService.findAllTechCrews();
+
+            return new ResponseEntity<>(techCrewResponseDtos, HttpStatus.OK);
+
+        }catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+
+        }
+         */
+
     }
 
     @PostMapping("/saveTechCrew")
     public ResponseEntity<String> saveTechCrew(@RequestBody SaveTechCrewRequestDto saveTechCrewRequestDto) {
 
-        String techCrewSaveDescription = techCrewService.saveTechCrew(saveTechCrewRequestDto);
+        try {
+            String techCrewSaveDescription = techCrewService.saveTechCrew(saveTechCrewRequestDto);
 
-        return new ResponseEntity<>(techCrewSaveDescription, HttpStatus.OK);
+            return new ResponseEntity<>(techCrewSaveDescription, HttpStatus.OK);
+        }catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+        }
+
 
     }
 

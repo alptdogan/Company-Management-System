@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class TechCrewService {
@@ -22,13 +23,29 @@ public class TechCrewService {
     @Autowired
     ModelMapper modelMapper;
 
-    public String saveTechCrew(SaveTechCrewRequestDto saveTechCrewRequestDto) {
+    public String saveTechCrew(SaveTechCrewRequestDto saveTechCrewRequestDto) throws Exception {
 
         TechCrew techCrew = modelMapper.map(saveTechCrewRequestDto, TechCrew.class);
 
-        techCrew = techCrewRepository.save(techCrew);
+        /*
+        Iterable<TechCrew> techCrews = techCrewRepository.findAll();
 
-        return techCrew.getCrewName() + " Has Been Created Successfully.";
+        List<TechCrewResponseDto> techCrewResponseDtos = new ArrayList<>();
+         */
+
+
+        if (techCrew.getCrewName().isBlank()) {
+            throw new Exception("Tech Crew's Name Cannot Be Empty.");
+        }
+        // else if (techCrewResponseDtos.contains(techCrew.getCrewName())) { throw new Exception("Specified Name Is Already In Use."); }
+        //else if (techCrew.getCrewName().equals(techCrewResponseDtos.stream().distinct().anyMatch(crewName -> crewName.equals(techCrew.getCrewName())))) {}
+        else {
+
+            techCrew = techCrewRepository.save(techCrew);
+
+            return techCrew.getCrewName() + " Has Been Created Successfully.";
+
+        }
 
     }
 
@@ -52,6 +69,25 @@ public class TechCrewService {
         }
 
         return techCrewResponseDtos;
+
+        /*
+        if (techCrewResponseDtos.size() >= 0) {
+
+            for (TechCrew techCrew : techCrews) {
+
+                TechCrewResponseDto techCrewResponseDto = modelMapper.map(techCrew, TechCrewResponseDto.class);
+                techCrewResponseDtos.add(techCrewResponseDto);
+
+            }
+
+            return techCrewResponseDtos;
+
+        }else {
+
+            throw new Exception("There Is No Crew To Be Listed.");
+
+        }
+         */
 
     }
 
