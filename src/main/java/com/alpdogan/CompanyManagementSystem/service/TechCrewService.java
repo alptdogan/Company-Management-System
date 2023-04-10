@@ -55,19 +55,27 @@ public class TechCrewService {
 
     }
 
-    public String updateTechCrewById(UpdateTechCrewRequestDto updateTechCrewRequestDto) {
+    public String updateTechCrewById(UpdateTechCrewRequestDto updateTechCrewRequestDto) throws Exception {
 
         int idTechCrewRequest = updateTechCrewRequestDto.getId();
         String nameTechCrewRequest = updateTechCrewRequestDto.getCrewName();
 
         Optional<TechCrew> techCrewOptional = techCrewRepository.findById(idTechCrewRequest);
-        TechCrew techCrew = techCrewOptional.get();
 
-        techCrew.setCrewName(nameTechCrewRequest);
+        if (techCrewOptional.isPresent()) {
+            TechCrew techCrew = techCrewOptional.get();
 
-        techCrewRepository.save(techCrew);
+            techCrew.setCrewName(nameTechCrewRequest);
 
-        return "Changes Saved Successfully.";
+            techCrewRepository.save(techCrew);
+
+            return "Tech Crew Updated Successfully.";
+
+        }else {
+
+            throw new Exception("Tech Crew -with the specified ID- Not Found");
+
+        }
 
     }
 

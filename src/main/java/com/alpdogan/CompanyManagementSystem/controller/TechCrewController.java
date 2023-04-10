@@ -49,9 +49,18 @@ public class TechCrewController {
     @PostMapping("/updateTechCrew")
     public ResponseEntity<String> updateTechCrewById(@RequestBody UpdateTechCrewRequestDto updateTechCrewRequestDto) {
 
-        String updateTechCrewDescription = techCrewService.updateTechCrewById(updateTechCrewRequestDto);
+        try {
 
-        return new ResponseEntity<>(updateTechCrewDescription, HttpStatus.OK);
+            String updateTechCrewDescription = techCrewService.updateTechCrewById(updateTechCrewRequestDto);
+
+            return new ResponseEntity<>(updateTechCrewDescription, HttpStatus.OK);
+
+        }catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+
+        }
+
 
     }
 
