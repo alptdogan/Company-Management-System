@@ -44,25 +44,33 @@ public class SoftwareDeveloperService {
 
     }
 
-    public List<SoftwareDeveloperResponseDto> findAllSoftwareDevelopers() {
+    public List<SoftwareDeveloperResponseDto> findAllSoftwareDevelopers() throws Exception {
 
         Iterable<SoftwareDeveloper> softwareDevelopers = softwareDeveloperRepository.findAll();
 
         List<SoftwareDeveloperResponseDto> softwareDeveloperResponseDtos = new ArrayList<>();
 
-        for (SoftwareDeveloper softwareDeveloper : softwareDevelopers) {
+        if (softwareDevelopers.iterator().hasNext()) {
 
-            SoftwareDeveloperResponseDto softwareDeveloperResponseDto = modelMapper.map(softwareDeveloper, SoftwareDeveloperResponseDto.class);
+            for (SoftwareDeveloper softwareDeveloper : softwareDevelopers) {
 
-            softwareDeveloperResponseDtos.add(softwareDeveloperResponseDto);
+                SoftwareDeveloperResponseDto softwareDeveloperResponseDto = modelMapper.map(softwareDeveloper, SoftwareDeveloperResponseDto.class);
+
+                softwareDeveloperResponseDtos.add(softwareDeveloperResponseDto);
+
+            }
+
+            return softwareDeveloperResponseDtos;
+
+        }else {
+
+            throw new Exception();
 
         }
 
-        return softwareDeveloperResponseDtos;
-
     }
 
-    public String saveSoftwareDeveloper(SaveSoftwareDeveloperRequestDto saveSoftwareDeveloperRequestDto) {
+    public String saveSoftwareDeveloper(SaveSoftwareDeveloperRequestDto saveSoftwareDeveloperRequestDto) throws Exception {
 
         String fullNameRequest = saveSoftwareDeveloperRequestDto.getFullName();
         boolean isFrontEndRequest = saveSoftwareDeveloperRequestDto.isFrontEndDeveloper();
@@ -80,15 +88,23 @@ public class SoftwareDeveloperService {
         softwareDeveloper.setArchitect(isArchitectRequest);
         softwareDeveloper.setTechCrew(techCrew);
 
-        softwareDeveloper.getTechCrew().getSoftwareDevelopers().add(softwareDeveloper.getId(), softwareDeveloper);
+        if (softwareDeveloper.getFullName().isBlank()) {
 
-        softwareDeveloperRepository.save(softwareDeveloper);
+            throw new Exception("Developer's Name Cannot Be Empty.");
 
-        return softwareDeveloper.getFullName() + " Has Been Successfully Created and Added to " + techCrew.getCrewName();
+        }else {
+
+            softwareDeveloper.getTechCrew().getSoftwareDevelopers().add(softwareDeveloper.getId(), softwareDeveloper);
+
+            softwareDeveloperRepository.save(softwareDeveloper);
+
+            return softwareDeveloper.getFullName() + " Has Been Successfully Created and Added to " + techCrew.getCrewName();
+
+        }
 
     }
 
-    public String updateSoftwareDeveloper(UpdateSoftwareDeveloperRequestDto updateSoftwareDeveloperDto) {
+    public String updateSoftwareDeveloper(UpdateSoftwareDeveloperRequestDto updateSoftwareDeveloperDto) throws Exception {
 
         int idRequest = updateSoftwareDeveloperDto.getId();
         String fullNameRequest = updateSoftwareDeveloperDto.getFullName();
@@ -102,28 +118,53 @@ public class SoftwareDeveloperService {
         Optional<SoftwareDeveloper> softwareDeveloperOptional = softwareDeveloperRepository.findById(idRequest);
         SoftwareDeveloper softwareDeveloper = softwareDeveloperOptional.get();
 
-        softwareDeveloper.setFullName(fullNameRequest);
-        softwareDeveloper.setFrontEndDeveloper(isFrontEndRequest);
-        softwareDeveloper.setBackEndDeveloper(isBackEndRequest);
-        softwareDeveloper.setArchitect(isArchitectRequest);
-        softwareDeveloper.setTechCrew(techCrew);
+        if (softwareDeveloperOptional.isPresent()) {
 
-        softwareDeveloperRepository.save(softwareDeveloper);
+            softwareDeveloper.setFullName(fullNameRequest);
+            softwareDeveloper.setFrontEndDeveloper(isFrontEndRequest);
+            softwareDeveloper.setBackEndDeveloper(isBackEndRequest);
+            softwareDeveloper.setArchitect(isArchitectRequest);
+            softwareDeveloper.setTechCrew(techCrew);
 
-        return "Changes Saved Successfully.";
+            if (softwareDeveloper.getFullName().isBlank()) {
+
+                throw new Exception("Developer's Name Cannot Be Empty.");
+
+            }else {
+
+
+                softwareDeveloperRepository.save(softwareDeveloper);
+
+                return "Developer Updated Successfully.";
+
+            }
+
+        }else {
+
+            throw new Exception("Developer -with the specified ID- Not Found");
+
+        }
+
     }
 
-    public String deleteSoftwareDeveloperById(Integer softwareDeveloperId) {
+    public String deleteSoftwareDeveloperById(Integer softwareDeveloperId) throws Exception {
 
-        Optional<SoftwareDeveloper> optionalSoftwareDeveloper = softwareDeveloperRepository.findById(softwareDeveloperId);
-        SoftwareDeveloper softwareDeveloper = optionalSoftwareDeveloper.get();
+        Optional<SoftwareDeveloper> softwareDeveloperOptional = softwareDeveloperRepository.findById(softwareDeveloperId);
+        SoftwareDeveloper softwareDeveloper = softwareDeveloperOptional.get();
 
-        // bunu yapmalıydım!!!!!!
-        softwareDeveloper.getTechCrew().getSoftwareDevelopers().remove(softwareDeveloper);
+        if (softwareDeveloperOptional.isPresent()) {
 
-        softwareDeveloperRepository.delete(softwareDeveloper);
+            softwareDeveloper.getTechCrew().getSoftwareDevelopers().remove(softwareDeveloper);
 
-        return "Software Developer Deleted.";
+            softwareDeveloperRepository.delete(softwareDeveloper);
+
+            return "Software Developer Deleted.";
+
+        }else {
+
+            throw new Exception("Cannot Found a Developer to Delete with the Specified ID.");
+
+        }
 
     }
 

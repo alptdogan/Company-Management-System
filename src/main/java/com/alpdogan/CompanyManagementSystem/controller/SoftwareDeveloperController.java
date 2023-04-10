@@ -37,38 +37,73 @@ public class SoftwareDeveloperController {
     }
 
     @GetMapping("findAllSoftwareDevelopers")
-    public ResponseEntity<List<SoftwareDeveloperResponseDto>> findAllSoftwareDevelopers() {
+    public ResponseEntity<?> findAllSoftwareDevelopers() {
 
-        List<SoftwareDeveloperResponseDto> softwareDeveloperResponseDtos = softwareDeveloperService.findAllSoftwareDevelopers();
+        try {
 
-        return new ResponseEntity<>(softwareDeveloperResponseDtos, HttpStatus.OK);
+            List<SoftwareDeveloperResponseDto> softwareDeveloperResponseDtos = softwareDeveloperService.findAllSoftwareDevelopers();
+
+            return new ResponseEntity<>(softwareDeveloperResponseDtos, HttpStatus.OK);
+
+        }
+        catch (Exception e) {
+
+            return new ResponseEntity<>(new ResponseModel("There Is No Crew To Be Listed."), HttpStatus.NOT_FOUND);
+
+        }
 
     }
 
     @PostMapping("/saveSoftwareDeveloper")
     public ResponseEntity<String> saveSoftwareDeveloper(@RequestBody SaveSoftwareDeveloperRequestDto saveSoftwareDeveloperRequestDto) {
 
-        String softwareDeveloperSaveDescription = softwareDeveloperService.saveSoftwareDeveloper(saveSoftwareDeveloperRequestDto);
+        try {
 
-        return new ResponseEntity<>(softwareDeveloperSaveDescription, HttpStatus.OK);
+            String softwareDeveloperSaveDescription = softwareDeveloperService.saveSoftwareDeveloper(saveSoftwareDeveloperRequestDto);
+
+            return new ResponseEntity<>(softwareDeveloperSaveDescription, HttpStatus.OK);
+
+        }
+        catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+        }
 
     }
 
     @PostMapping("/updateSoftwareDeveloper")
     public ResponseEntity<String> updateSoftwareDeveloperById (@RequestBody UpdateSoftwareDeveloperRequestDto updateSoftwareDeveloperRequestDto) {
 
-        String updateSoftwareDeveloperDescription = softwareDeveloperService.updateSoftwareDeveloper(updateSoftwareDeveloperRequestDto);
+        try {
 
-        return new ResponseEntity<>(updateSoftwareDeveloperDescription, HttpStatus.OK);
+            String updateSoftwareDeveloperDescription = softwareDeveloperService.updateSoftwareDeveloper(updateSoftwareDeveloperRequestDto);
+
+            return new ResponseEntity<>(updateSoftwareDeveloperDescription, HttpStatus.OK);
+
+        }catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+
+        }
 
     }
 
     @DeleteMapping("/deleteSoftwareDeveloper")
     public ResponseEntity<String> deleteSoftwareDeveloperById(@RequestParam Integer softwareDeveloperId) {
 
-        String deleteSoftwareDeveloperDescription = softwareDeveloperService.deleteSoftwareDeveloperById(softwareDeveloperId);
+        try{
 
-        return new ResponseEntity<>(deleteSoftwareDeveloperDescription, HttpStatus.OK);
+            String deleteSoftwareDeveloperDescription = softwareDeveloperService.deleteSoftwareDeveloperById(softwareDeveloperId);
+
+            return new ResponseEntity<>(deleteSoftwareDeveloperDescription, HttpStatus.OK);
+
+        }
+        catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+
+        }
 
     }
 
