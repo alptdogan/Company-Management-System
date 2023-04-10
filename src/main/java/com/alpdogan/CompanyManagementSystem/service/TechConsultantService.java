@@ -2,7 +2,9 @@ package com.alpdogan.CompanyManagementSystem.service;
 
 import com.alpdogan.CompanyManagementSystem.dto.request.SaveTechConsultantRequestDto;
 import com.alpdogan.CompanyManagementSystem.dto.request.UpdateTechConsultantRequestDto;
+import com.alpdogan.CompanyManagementSystem.dto.response.SoftwareDeveloperResponseDto;
 import com.alpdogan.CompanyManagementSystem.dto.response.TechConsultantResponseDto;
+import com.alpdogan.CompanyManagementSystem.entity.SoftwareDeveloper;
 import com.alpdogan.CompanyManagementSystem.entity.TechConsultant;
 import com.alpdogan.CompanyManagementSystem.entity.TechCrew;
 import com.alpdogan.CompanyManagementSystem.repository.TechConsultantRepository;
@@ -27,7 +29,49 @@ public class TechConsultantService {
     @Autowired
     ModelMapper modelMapper;
 
-    public String saveTechConsultant(SaveTechConsultantRequestDto saveTechConsultantRequestDto) {
+    public TechConsultant findTechConsultantById(int techConsultantId) throws Exception {
+
+        Optional<TechConsultant> techConsultantOptional = techConsultantRepository.findById(techConsultantId);
+
+        if (techConsultantOptional.isPresent()){
+
+            return techConsultantRepository.findTechConsultantById(techConsultantId);
+
+        }else {
+
+            throw new Exception();
+
+        }
+
+    }
+
+    public List<TechConsultantResponseDto> findAllTechConsultants() throws Exception {
+
+        Iterable<TechConsultant> techConsultants = techConsultantRepository.findAll();
+
+        List<TechConsultantResponseDto> techConsultantResponseDtos = new ArrayList<>();
+
+        if (techConsultants.iterator().hasNext()) {
+
+            for (TechConsultant techConsultant : techConsultants) {
+
+                TechConsultantResponseDto softwareDeveloperResponseDto = modelMapper.map(techConsultant, TechConsultantResponseDto.class);
+
+                techConsultantResponseDtos.add(softwareDeveloperResponseDto);
+
+            }
+
+            return techConsultantResponseDtos;
+
+        }else {
+
+            throw new Exception();
+
+        }
+
+    }
+
+    public String saveTechConsultant(SaveTechConsultantRequestDto saveTechConsultantRequestDto) throws Exception {
 
         String fullNameRequest = saveTechConsultantRequestDto.getFullName();
         int techCrewIdRequest = saveTechConsultantRequestDto.getTechCrewId();
@@ -39,39 +83,23 @@ public class TechConsultantService {
         techConsultant.setFullName(fullNameRequest);
         techConsultant.setTechCrew(techCrew);
 
-        techConsultant.getTechCrew().getTechConsultants().add(techConsultant.getId(), techConsultant);
+        if (techConsultant.getFullName().isBlank()) {
 
-        techConsultantRepository.save(techConsultant);
+            throw new Exception("Consuşltant's Name Cannot Be Empty.");
 
-        return techConsultant.getFullName() + " Has Been Successfully Created and Added to " + techCrew.getCrewName() + " as a Tech Consultant.";
+        }else {
 
-    }
+            techConsultant.getTechCrew().getTechConsultants().add(techConsultant.getId(), techConsultant);
 
-    public TechConsultant findTechConsultantById(int techConsultantId) {
+            techConsultantRepository.save(techConsultant);
 
-        return techConsultantRepository.findTechConsultantById(techConsultantId);
-
-    }
-
-    public List<TechConsultantResponseDto> findAllTechConsultants() {
-
-        Iterable<TechConsultant> techConsultants = techConsultantRepository.findAll();
-
-        List<TechConsultantResponseDto> techConsultantResponseDtos = new ArrayList<>();
-
-        for (TechConsultant techConsultant : techConsultants) {
-
-            TechConsultantResponseDto softwareDeveloperResponseDto = modelMapper.map(techConsultant, TechConsultantResponseDto.class);
-
-            techConsultantResponseDtos.add(softwareDeveloperResponseDto);
+            return techConsultant.getFullName() + " Has Been Successfully Created and Added to " + techCrew.getCrewName() + " as a Tech Consultant.";
 
         }
 
-        return techConsultantResponseDtos;
-
     }
 
-    public String updateTechConsultantById(UpdateTechConsultantRequestDto updateTechConsultantRequestDto) {
+    public String updateTechConsultantById(UpdateTechConsultantRequestDto updateTechConsultantRequestDto) throws Exception {
 
         int idRequest = updateTechConsultantRequestDto.getId();
         String fullNameRequest = updateTechConsultantRequestDto.getFullName();
@@ -82,24 +110,49 @@ public class TechConsultantService {
         Optional<TechConsultant> techConsultantOptional = techConsultantRepository.findById(idRequest);
         TechConsultant techConsultant = techConsultantOptional.get();
 
-        techConsultant.setFullName(fullNameRequest);
-        techConsultant.setTechCrew(techCrew);
+        if (techConsultantOptional.isPresent()) {
 
-        techConsultantRepository.save(techConsultant);
+            techConsultant.setFullName(fullNameRequest);
+            techConsultant.setTechCrew(techCrew);
 
-        return "Changes Saved Successfully.";
+            if (techConsultant.getFullName().isBlank()) {
+
+                throw new Exception("Consultant's Name Cannot Be Empty.");
+
+            }else {
+
+
+                techConsultantRepository.save(techConsultant);
+
+                return "Consultant Updated Successfully.";
+
+            }
+
+        }else {
+
+            throw new Exception("Consultant -with the specified ID- Not Found");
+
+        }
     }
 
-    public String deleteTechConsultantById(Integer techConsultantId) {
+    public String deleteTechConsultantById(Integer techConsultantId) throws Exception {
 
-        Optional<TechConsultant> optionalTechConsultant = techConsultantRepository.findById(techConsultantId);
-        TechConsultant techConsultant = optionalTechConsultant.get();
+        Optional<TechConsultant> techConsultantOptional = techConsultantRepository.findById(techConsultantId);
+        TechConsultant techConsultant = techConsultantOptional.get();
 
-        techConsultant.getTechCrew().getTechConsultants().remove(techConsultant);
+        if (techConsultantOptional.isPresent()) {
 
-        techConsultantRepository.delete(techConsultant);
+            techConsultant.getTechCrew().getTechConsultants().remove(techConsultant);
 
-        return "Tech Consultant Deleted.";
+            techConsultantRepository.delete(techConsultant);
+
+            return "Tech Consultant Deleted.";
+
+        }else {
+
+            throw new Exception("Cannot Found a Consultant to Delete with the Specified ID.");
+
+        }
 
     }
 
