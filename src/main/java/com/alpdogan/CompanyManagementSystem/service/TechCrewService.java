@@ -23,48 +23,19 @@ public class TechCrewService {
     @Autowired
     ModelMapper modelMapper;
 
-    public String saveTechCrew(SaveTechCrewRequestDto saveTechCrewRequestDto) throws Exception {
-
-        TechCrew techCrew = modelMapper.map(saveTechCrewRequestDto, TechCrew.class);
-
-        /*
-        Iterable<TechCrew> techCrews = techCrewRepository.findAll();
-
-        List<TechCrewResponseDto> techCrewResponseDtos = new ArrayList<>();
-         */
-
-
-        if (techCrew.getCrewName().isBlank()) {
-            throw new Exception("Tech Crew's Name Cannot Be Empty.");
-        }
-        // else if (techCrewResponseDtos.contains(techCrew.getCrewName())) { throw new Exception("Specified Name Is Already In Use."); }
-        //else if (techCrew.getCrewName().equals(techCrewResponseDtos.stream().distinct().anyMatch(crewName -> crewName.equals(techCrew.getCrewName())))) {}
-        else {
-
-            techCrew = techCrewRepository.save(techCrew);
-
-            return techCrew.getCrewName() + " Has Been Created Successfully.";
-
-        }
-
-    }
-
-    public TechCrew findTechCrewById(int techCrewId) {
+    public TechCrew findTechCrewById(int techCrewId) throws Exception {
 
         Optional<TechCrew> techCrewOptional = techCrewRepository.findById(techCrewId);
 
-        return techCrewRepository.findTechCrewById(techCrewId);
-
-        /*
         if (techCrewOptional.isPresent()) {
 
             return techCrewRepository.findTechCrewById(techCrewId);
 
         }else {
-            throw new Exception("No Tech Crew Found With The Specified ID.");
-        }
-         */
 
+            throw new Exception();
+
+        }
 
     }
 
@@ -73,6 +44,7 @@ public class TechCrewService {
         Iterable<TechCrew> techCrews = techCrewRepository.findAll();
 
         List<TechCrewResponseDto> techCrewResponseDtos = new ArrayList<>();
+
 
         for (TechCrew techCrew : techCrews) {
 
@@ -101,6 +73,32 @@ public class TechCrewService {
 
         }
          */
+
+    }
+
+    public String saveTechCrew(SaveTechCrewRequestDto saveTechCrewRequestDto) throws Exception {
+
+        TechCrew techCrew = modelMapper.map(saveTechCrewRequestDto, TechCrew.class);
+
+        /*
+        Iterable<TechCrew> techCrews = techCrewRepository.findAll();
+
+        List<TechCrewResponseDto> techCrewResponseDtos = new ArrayList<>();
+         */
+
+
+        if (techCrew.getCrewName().isBlank()) {
+            throw new Exception("Tech Crew's Name Cannot Be Empty.");
+        }
+        // else if (techCrewResponseDtos.contains(techCrew.getCrewName())) { throw new Exception("Specified Name Is Already In Use."); }
+        //else if (techCrew.getCrewName().equals(techCrewResponseDtos.stream().distinct().anyMatch(crewName -> crewName.equals(techCrew.getCrewName())))) {}
+        else {
+
+            techCrew = techCrewRepository.save(techCrew);
+
+            return techCrew.getCrewName() + " Has Been Created Successfully.";
+
+        }
 
     }
 

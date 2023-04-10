@@ -1,5 +1,6 @@
 package com.alpdogan.CompanyManagementSystem.controller;
 
+import com.alpdogan.CompanyManagementSystem.configuration.ResponseModel;
 import com.alpdogan.CompanyManagementSystem.dto.request.SaveTechCrewRequestDto;
 import com.alpdogan.CompanyManagementSystem.dto.request.UpdateTechCrewRequestDto;
 import com.alpdogan.CompanyManagementSystem.dto.response.TechCrewResponseDto;
@@ -20,13 +21,8 @@ public class TechCrewController {
     TechCrewService techCrewService;
 
     @GetMapping("/findTechCrewById")
-    public ResponseEntity<TechCrew> findTechCrewById (@RequestParam int techCrewId) {
+    public ResponseEntity<?> findTechCrewById (@RequestParam int techCrewId) {
 
-        TechCrew techCrew = techCrewService.findTechCrewById(techCrewId);
-
-        return new ResponseEntity<>(techCrew, HttpStatus.OK);
-
-        /*
         try {
             TechCrew techCrew = techCrewService.findTechCrewById(techCrewId);
 
@@ -34,10 +30,9 @@ public class TechCrewController {
 
         }catch (Exception e) {
 
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ResponseModel("No Tech Crew Found With The Specified ID."), HttpStatus.NOT_FOUND);
 
         }
-         */
 
     }
 
