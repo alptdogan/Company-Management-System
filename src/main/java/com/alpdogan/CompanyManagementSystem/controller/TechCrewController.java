@@ -26,6 +26,19 @@ public class TechCrewController {
 
         return new ResponseEntity<>(techCrew, HttpStatus.OK);
 
+        /*
+        try {
+            TechCrew techCrew = techCrewService.findTechCrewById(techCrewId);
+
+            return new ResponseEntity<>(techCrew, HttpStatus.OK);
+
+        }catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+
+        }
+         */
+
     }
 
     @GetMapping("findAllTechCrews")

@@ -51,7 +51,20 @@ public class TechCrewService {
 
     public TechCrew findTechCrewById(int techCrewId) {
 
+        Optional<TechCrew> techCrewOptional = techCrewRepository.findById(techCrewId);
+
         return techCrewRepository.findTechCrewById(techCrewId);
+
+        /*
+        if (techCrewOptional.isPresent()) {
+
+            return techCrewRepository.findTechCrewById(techCrewId);
+
+        }else {
+            throw new Exception("No Tech Crew Found With The Specified ID.");
+        }
+         */
+
 
     }
 
