@@ -37,13 +37,8 @@ public class TechCrewController {
     }
 
     @GetMapping("findAllTechCrews")
-    public ResponseEntity<List<TechCrewResponseDto>> findAllTechCrews() {
+    public ResponseEntity<?> findAllTechCrews() {
 
-        List<TechCrewResponseDto> techCrewResponseDtos = techCrewService.findAllTechCrews();
-
-        return new ResponseEntity<>(techCrewResponseDtos, HttpStatus.OK);
-
-        /*
         try {
             List<TechCrewResponseDto> techCrewResponseDtos = techCrewService.findAllTechCrews();
 
@@ -51,10 +46,9 @@ public class TechCrewController {
 
         }catch (Exception e) {
 
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ResponseModel("There Is No Crew To Be Listed."), HttpStatus.NOT_FOUND);
 
         }
-         */
 
     }
 

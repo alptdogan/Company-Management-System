@@ -39,24 +39,13 @@ public class TechCrewService {
 
     }
 
-    public List<TechCrewResponseDto> findAllTechCrews() {
+    public List<TechCrewResponseDto> findAllTechCrews() throws Exception {
 
         Iterable<TechCrew> techCrews = techCrewRepository.findAll();
 
         List<TechCrewResponseDto> techCrewResponseDtos = new ArrayList<>();
 
-
-        for (TechCrew techCrew : techCrews) {
-
-            TechCrewResponseDto techCrewResponseDto = modelMapper.map(techCrew, TechCrewResponseDto.class);
-            techCrewResponseDtos.add(techCrewResponseDto);
-
-        }
-
-        return techCrewResponseDtos;
-
-        /*
-        if (techCrewResponseDtos.size() >= 0) {
+        if (techCrews.iterator().hasNext()) {
 
             for (TechCrew techCrew : techCrews) {
 
@@ -69,10 +58,9 @@ public class TechCrewService {
 
         }else {
 
-            throw new Exception("There Is No Crew To Be Listed.");
+            throw new Exception();
 
         }
-         */
 
     }
 
