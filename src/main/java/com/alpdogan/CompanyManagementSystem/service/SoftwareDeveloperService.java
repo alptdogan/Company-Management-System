@@ -73,9 +73,12 @@ public class SoftwareDeveloperService {
     public String saveSoftwareDeveloper(SaveSoftwareDeveloperRequestDto saveSoftwareDeveloperRequestDto) throws Exception {
 
         String fullNameRequest = saveSoftwareDeveloperRequestDto.getFullName();
+        /*
         boolean isFrontEndRequest = saveSoftwareDeveloperRequestDto.isFrontEndDeveloper();
         boolean isBackEndRequest = saveSoftwareDeveloperRequestDto.isBackEndDeveloper();
         boolean isArchitectRequest = saveSoftwareDeveloperRequestDto.isArchitect();
+         */
+        int roleIdRequest = saveSoftwareDeveloperRequestDto.getRoleId();
         int techCrewIdRequest = saveSoftwareDeveloperRequestDto.getTechCrewId();
 
         TechCrew techCrew = techCrewRepository.findById(techCrewIdRequest).get();
@@ -83,9 +86,12 @@ public class SoftwareDeveloperService {
         SoftwareDeveloper softwareDeveloper = new SoftwareDeveloper();
 
         softwareDeveloper.setFullName(fullNameRequest);
+        /*
         softwareDeveloper.setFrontEndDeveloper(isFrontEndRequest);
         softwareDeveloper.setBackEndDeveloper(isBackEndRequest);
         softwareDeveloper.setArchitect(isArchitectRequest);
+        */
+        softwareDeveloper.setRoles(softwareDeveloper.getRoles()); // Burayı nasıl yapmalıyım?
         softwareDeveloper.setTechCrew(techCrew);
 
         if (softwareDeveloper.getFullName().isBlank()) {
@@ -121,9 +127,11 @@ public class SoftwareDeveloperService {
         if (softwareDeveloperOptional.isPresent()) {
 
             softwareDeveloper.setFullName(fullNameRequest);
+            /*
             softwareDeveloper.setFrontEndDeveloper(isFrontEndRequest);
             softwareDeveloper.setBackEndDeveloper(isBackEndRequest);
             softwareDeveloper.setArchitect(isArchitectRequest);
+             */
             softwareDeveloper.setTechCrew(techCrew);
 
             if (softwareDeveloper.getFullName().isBlank()) {
