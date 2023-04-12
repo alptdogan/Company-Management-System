@@ -65,7 +65,6 @@ public class TechCrewController {
 
         }
 
-
     }
 
     @PostMapping("/updateTechCrew")
@@ -83,7 +82,6 @@ public class TechCrewController {
 
         }
 
-
     }
 
     @DeleteMapping("/deleteTechCrew")
@@ -100,7 +98,6 @@ public class TechCrewController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 
         }
-
 
     }
 

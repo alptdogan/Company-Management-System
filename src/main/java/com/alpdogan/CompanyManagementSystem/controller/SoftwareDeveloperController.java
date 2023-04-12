@@ -27,8 +27,7 @@ public class SoftwareDeveloperController {
             SoftwareDeveloper softwareDeveloper = softwareDeveloperService.findSoftwareDeveloperById(softwareDeveloperId);
 
             return new ResponseEntity<>(softwareDeveloper, HttpStatus.OK);
-        }
-        catch (Exception e) {
+        }catch (Exception e) {
 
             return new ResponseEntity<>(new ResponseModel("No Developer Found With The Specified ID."), HttpStatus.NOT_FOUND);
 
@@ -45,8 +44,7 @@ public class SoftwareDeveloperController {
 
             return new ResponseEntity<>(softwareDeveloperResponseDtos, HttpStatus.OK);
 
-        }
-        catch (Exception e) {
+        }catch (Exception e) {
 
             return new ResponseEntity<>(new ResponseModel("There Is No Crew To Be Listed."), HttpStatus.NOT_FOUND);
 
@@ -63,8 +61,7 @@ public class SoftwareDeveloperController {
 
             return new ResponseEntity<>(softwareDeveloperSaveDescription, HttpStatus.OK);
 
-        }
-        catch (Exception e) {
+        }catch (Exception e) {
 
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 
@@ -98,8 +95,7 @@ public class SoftwareDeveloperController {
 
             return new ResponseEntity<>(deleteSoftwareDeveloperDescription, HttpStatus.OK);
 
-        }
-        catch (Exception e) {
+        }catch (Exception e) {
 
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 
