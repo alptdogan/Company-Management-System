@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Data
@@ -18,25 +17,7 @@ public class SoftwareDeveloper {
     @Column(name = "full_name")
     private String fullName;
 
-    /*
-    @Column(name = "is_back_end_developer")
-    private boolean isBackEndDeveloper;
-
-    @Column(name = "is_front_end_developer")
-    private boolean isFrontEndDeveloper;
-
-    @Column(name = "is_architect")
-    private boolean isArchitect;
-     */
-
-    /*
     @JsonIgnore
-    @ElementCollection(targetClass = ERole.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "developer_role", joinColumns = @JoinColumn(name = "developer_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<ERole> role;
-     */
-
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private ERole role;
