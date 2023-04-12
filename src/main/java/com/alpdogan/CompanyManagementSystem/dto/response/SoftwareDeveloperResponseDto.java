@@ -17,8 +17,8 @@ public class SoftwareDeveloperResponseDto {
     private boolean isArchitect;
      */
 
-    private int roleId;
-    
+    private String role;
+
     private int techCrewId;
 
 }

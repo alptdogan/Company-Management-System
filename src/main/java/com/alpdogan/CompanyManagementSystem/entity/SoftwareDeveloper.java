@@ -29,11 +29,17 @@ public class SoftwareDeveloper {
     private boolean isArchitect;
      */
 
+    /*
     @JsonIgnore
     @ElementCollection(targetClass = ERole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "developer_role", joinColumns = @JoinColumn(name = "developer_id"))
     @Enumerated(EnumType.STRING)
-    private Set<ERole> roles;
+    private Set<ERole> role;
+     */
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private ERole role;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = {

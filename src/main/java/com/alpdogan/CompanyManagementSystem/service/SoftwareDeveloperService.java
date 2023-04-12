@@ -3,6 +3,7 @@ package com.alpdogan.CompanyManagementSystem.service;
 import com.alpdogan.CompanyManagementSystem.dto.request.SaveSoftwareDeveloperRequestDto;
 import com.alpdogan.CompanyManagementSystem.dto.request.UpdateSoftwareDeveloperRequestDto;
 import com.alpdogan.CompanyManagementSystem.dto.response.SoftwareDeveloperResponseDto;
+import com.alpdogan.CompanyManagementSystem.entity.ERole;
 import com.alpdogan.CompanyManagementSystem.entity.SoftwareDeveloper;
 import com.alpdogan.CompanyManagementSystem.entity.TechCrew;
 import com.alpdogan.CompanyManagementSystem.repository.SoftwareDeveloperRepository;
@@ -78,7 +79,7 @@ public class SoftwareDeveloperService {
         boolean isBackEndRequest = saveSoftwareDeveloperRequestDto.isBackEndDeveloper();
         boolean isArchitectRequest = saveSoftwareDeveloperRequestDto.isArchitect();
          */
-        int roleIdRequest = saveSoftwareDeveloperRequestDto.getRoleId();
+        String roleRequest = saveSoftwareDeveloperRequestDto.getRole();
         int techCrewIdRequest = saveSoftwareDeveloperRequestDto.getTechCrewId();
 
         TechCrew techCrew = techCrewRepository.findById(techCrewIdRequest).get();
@@ -91,7 +92,7 @@ public class SoftwareDeveloperService {
         softwareDeveloper.setBackEndDeveloper(isBackEndRequest);
         softwareDeveloper.setArchitect(isArchitectRequest);
         */
-        softwareDeveloper.setRoles(roleIdRequest); // Burayı nasıl yapmalıyım?
+        softwareDeveloper.setRole(ERole.valueOf(roleRequest)); // Burayı nasıl yapmalıyım?
         softwareDeveloper.setTechCrew(techCrew);
 
         if (softwareDeveloper.getFullName().isBlank()) {
