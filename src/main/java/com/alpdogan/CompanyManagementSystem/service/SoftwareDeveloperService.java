@@ -91,7 +91,7 @@ public class SoftwareDeveloperService {
         softwareDeveloper.setBackEndDeveloper(isBackEndRequest);
         softwareDeveloper.setArchitect(isArchitectRequest);
         */
-        softwareDeveloper.setRoles(softwareDeveloper.getRoles()); // Burayı nasıl yapmalıyım?
+        softwareDeveloper.setRoles(roleIdRequest); // Burayı nasıl yapmalıyım?
         softwareDeveloper.setTechCrew(techCrew);
 
         if (softwareDeveloper.getFullName().isBlank()) {

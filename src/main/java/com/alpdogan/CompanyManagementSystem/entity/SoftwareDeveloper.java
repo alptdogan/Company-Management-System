@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,6 +29,7 @@ public class SoftwareDeveloper {
     private boolean isArchitect;
      */
 
+    @JsonIgnore
     @ElementCollection(targetClass = ERole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "developer_role", joinColumns = @JoinColumn(name = "developer_id"))
     @Enumerated(EnumType.STRING)
