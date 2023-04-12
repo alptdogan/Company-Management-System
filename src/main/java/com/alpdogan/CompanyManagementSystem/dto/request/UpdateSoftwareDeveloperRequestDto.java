@@ -9,11 +9,7 @@ public class UpdateSoftwareDeveloperRequestDto {
 
     private String fullName;
 
-    private boolean isBackEndDeveloper;
-
-    private boolean isFrontEndDeveloper;
-
-    private boolean isArchitect;
+    private String role;
 
     private int techCrewId;
 
