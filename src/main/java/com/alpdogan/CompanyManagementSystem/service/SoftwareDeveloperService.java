@@ -74,11 +74,6 @@ public class SoftwareDeveloperService {
     public String saveSoftwareDeveloper(SaveSoftwareDeveloperRequestDto saveSoftwareDeveloperRequestDto) throws Exception {
 
         String fullNameRequest = saveSoftwareDeveloperRequestDto.getFullName();
-        /*
-        boolean isFrontEndRequest = saveSoftwareDeveloperRequestDto.isFrontEndDeveloper();
-        boolean isBackEndRequest = saveSoftwareDeveloperRequestDto.isBackEndDeveloper();
-        boolean isArchitectRequest = saveSoftwareDeveloperRequestDto.isArchitect();
-         */
         String roleRequest = saveSoftwareDeveloperRequestDto.getRole();
         int techCrewIdRequest = saveSoftwareDeveloperRequestDto.getTechCrewId();
 
@@ -87,12 +82,7 @@ public class SoftwareDeveloperService {
         SoftwareDeveloper softwareDeveloper = new SoftwareDeveloper();
 
         softwareDeveloper.setFullName(fullNameRequest);
-        /*
-        softwareDeveloper.setFrontEndDeveloper(isFrontEndRequest);
-        softwareDeveloper.setBackEndDeveloper(isBackEndRequest);
-        softwareDeveloper.setArchitect(isArchitectRequest);
-        */
-        softwareDeveloper.setRole(ERole.valueOf(roleRequest)); // Burayı nasıl yapmalıyım?
+        softwareDeveloper.setRole(ERole.valueOf(roleRequest));
         softwareDeveloper.setTechCrew(techCrew);
 
         if (softwareDeveloper.getFullName().isBlank()) {
@@ -115,9 +105,7 @@ public class SoftwareDeveloperService {
 
         int idRequest = updateSoftwareDeveloperDto.getId();
         String fullNameRequest = updateSoftwareDeveloperDto.getFullName();
-        boolean isFrontEndRequest = updateSoftwareDeveloperDto.isFrontEndDeveloper();
-        boolean isBackEndRequest = updateSoftwareDeveloperDto.isBackEndDeveloper();
-        boolean isArchitectRequest = updateSoftwareDeveloperDto.isArchitect();
+        String roleRequest = updateSoftwareDeveloperDto.getRole();
         int techCrewIdRequest = updateSoftwareDeveloperDto.getTechCrewId();
 
         TechCrew techCrew = techCrewRepository.findById(techCrewIdRequest).get();
@@ -128,11 +116,7 @@ public class SoftwareDeveloperService {
         if (softwareDeveloperOptional.isPresent()) {
 
             softwareDeveloper.setFullName(fullNameRequest);
-            /*
-            softwareDeveloper.setFrontEndDeveloper(isFrontEndRequest);
-            softwareDeveloper.setBackEndDeveloper(isBackEndRequest);
-            softwareDeveloper.setArchitect(isArchitectRequest);
-             */
+            softwareDeveloper.setRole(ERole.valueOf(roleRequest));
             softwareDeveloper.setTechCrew(techCrew);
 
             if (softwareDeveloper.getFullName().isBlank()) {
