@@ -130,7 +130,7 @@ public class TechConsultantService {
 
         }else {
 
-            throw new Exception("Consultant -with the specified ID- Not Found");
+            throw new Exception("Cannot Find Any Consultant To Update With The Specified ID");
 
         }
     }
@@ -150,7 +150,7 @@ public class TechConsultantService {
 
         }else {
 
-            throw new Exception("Cannot Found a Consultant to Delete with the Specified ID.");
+            throw new Exception("Cannot Find Any Consultant To Delete With The Specified ID.");
 
         }
 

@@ -108,7 +108,7 @@ public class TechCrewService {
 
         }else {
 
-            throw new Exception("Tech Crew -with the specified ID- Not Found");
+            throw new Exception("Cannot Find Any Tech Crew To Update With The Specified ID");
 
         }
 
@@ -128,7 +128,7 @@ public class TechCrewService {
 
         }else {
 
-            throw new Exception("Cannot Found a Crew to Delete with the Specified ID.");
+            throw new Exception("Cannot Find Any Crew To Delete With The Specified ID.");
 
         }
 

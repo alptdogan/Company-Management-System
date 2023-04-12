@@ -36,8 +36,7 @@ public class SoftwareDeveloperService {
 
             return softwareDeveloperRepository.findSofwareDeveloperById(softwareDeveloperId);
 
-        }
-        else {
+        }else {
 
             throw new Exception();
 
@@ -134,7 +133,7 @@ public class SoftwareDeveloperService {
 
         }else {
 
-            throw new Exception("Developer -with the specified ID- Not Found");
+            throw new Exception("Cannot Find Any Developer To Update With The Specified ID");
 
         }
 
@@ -155,7 +154,7 @@ public class SoftwareDeveloperService {
 
         }else {
 
-            throw new Exception("Cannot Found a Developer to Delete with the Specified ID.");
+            throw new Exception("Cannot Find Any Developer To Delete With The Specified ID.");
 
         }
 
