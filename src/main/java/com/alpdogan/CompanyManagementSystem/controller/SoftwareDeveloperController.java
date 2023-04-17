@@ -46,7 +46,7 @@ public class SoftwareDeveloperController {
 
         }catch (Exception e) {
 
-            return new ResponseEntity<>(new ResponseModel("There Is No Crew To Be Listed."), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ResponseModel("There Is No Developer To Be Listed."), HttpStatus.NOT_FOUND);
 
         }
 
